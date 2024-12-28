@@ -49,15 +49,17 @@ async function getPost(slug: string) {
     return null
   }
 }
-
-export default async function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost({ 
+  params 
+}: {
+  params: { slug: string }
+}) {
   const post = await getPost(params.slug)
 
   if (!post) {
     notFound()
   }
 
-  // Replace custom-image tags with MDXImage component
   const content = post.content.replace(
     /<custom-image([^>]*)>/g,
     (match, attributes) => {
@@ -84,4 +86,3 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     </article>
   )
 }
-
